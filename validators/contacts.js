@@ -5,13 +5,14 @@ const addSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
   phone: Joi.string().required(),
+  favorite: Joi.boolean(),
 });
 
 const addContactValidation = (req, res, next) => {
   const { error } = addSchema.validate(req.body);
 
   if (error) {
-    console.log(error)
+    console.log(error);
     if (error.details[0].type === "any.required") {
       throw HttpError(
         400,
