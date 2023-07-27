@@ -4,7 +4,8 @@ const { HttpError } = require("../helpers");
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await Contact.find();
+    const { _id: owner } = req.user;
+    const result = await Contact.find({ owner },).populate("owner",);
     res.json(result);
   } catch (error) {
     next(error);
@@ -41,7 +42,8 @@ const deleteById = async (req, res, next) => {
 
 const addContact = async (req, res, next) => {
   try {
-    const result = await Contact.create(req.body);
+    const { _id: owner } = req.user;
+    const result = await Contact.create({ ...req.body, owner },);
     res.status(201).json(result);
   } catch (error) {
     next(error);
