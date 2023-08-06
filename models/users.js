@@ -3,7 +3,6 @@ const { handleMongooseError } = require("../helpers");
 
 const subscribe = ["starter", "pro", "business"];
 
-
 const userSchema = new Schema(
   {
     password: {
@@ -21,6 +20,7 @@ const userSchema = new Schema(
       default: "starter",
     },
     token: String,
+    avatarURL: String,
   },
   { versionKey: false }
 );
